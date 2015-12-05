@@ -1,0 +1,66 @@
+final VERSION_MAJOR = 0 // max two digits
+final VERSION_MINOR = 1 // max two digits
+final VERSION_PATCH = 0 // max two digits
+
+apply plugin: 'com.android.application'
+apply plugin: 'io.fabric'
+apply plugin: 'com.neenbedankt.android-apt'
+
+android {
+    compileSdkVersion 23
+    buildToolsVersion "23.0.2"
+
+    defaultConfig {
+        applicationId "com.doodeec.digitalsandstorm"
+        minSdkVersion 14
+        targetSdkVersion 23
+        versionCode VERSION_MAJOR * 10000 + VERSION_MINOR * 100 + VERSION_PATCH
+        versionName "${VERSION_MAJOR}.${VERSION_MINOR}.${VERSION_PATCH}"
+    }
+
+    signingConfigs {
+        release {
+            // passwords and alias are obtained via askForPasswords task
+            storeFile file("../${project.property('keystore.file')}")
+            storePassword ""
+            keyAlias ""
+            keyPassword ""
+        }
+    }
+
+    buildTypes {
+        debug {
+            versionNameSuffix "-debug"
+        }
+
+        release {
+            signingConfig signingConfigs.release
+            zipAlignEnabled true
+            minifyEnabled false
+            shrinkResources false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    compile 'com.android.support:appcompat-v7:23.1.1'
+    compile 'com.android.support:design:23.1.1'
+    compile 'com.jakewharton:butterknife:7.0.1'
+    compile 'com.squareup.retrofit:retrofit:2.0.0-beta2'
+    compile 'com.squareup.retrofit:converter-gson:2.0.0-beta2'
+    compile 'com.squareup.retrofit:retrofit-mock:2.0.0-beta2'
+    compile 'com.squareup.okhttp:logging-interceptor:2.6.0'
+    compile 'se.emilsjolander:sprinkles:1.3.1'
+    compile 'com.google.dagger:dagger:2.0.2'
+    provided 'com.google.dagger:dagger-compiler:2.0.2'
+    provided 'org.glassfish:javax.annotation:10.0-b28'
+    compile 'com.squareup.picasso:picasso:2.5.2'
+    compile 'com.google.guava:guava:19.0-rc3'
+    compile('com.crashlytics.sdk.android:crashlytics:2.5.5@aar') {
+        transitive = true;
+    }
+}
+
+apply from: "./build_app.gradle"
+apply from: "./ask_pass.gradle"

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest
+    package="com.doodeec.digitalsandstorm"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+    <application
+        android:name=".DigitalSandstormApp"
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="false"
+        android:theme="@style/AppTheme">
+        <activity
+            android:name=".activity.RecipeListActivity"
+            android:label="@string/app_name"
+            android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".activity.RecipeDetailActivity"
+            android:label="@string/title_activity_recipe_detail"
+            android:theme="@style/AppTheme.NoActionBar">
+        </activity>
+
+        <meta-data
+            android:name="io.fabric.ApiKey"
+            android:value="e17ade555a80ea7a5d03e2803ea208dc62abd327" />
+    </application>
+
+</manifest>

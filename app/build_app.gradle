@@ -1,0 +1,8 @@
+task copyAppBuildFile(type: Copy) {
+    from "${buildDir}/outputs/apk/${project.name}-release.apk"
+    into "${rootDir}/apk/"
+    rename("${project.name}-release.apk", "${android.defaultConfig.applicationId}-${android.defaultConfig.versionName}.apk")
+}
+
+task buildApp(dependsOn: ['assembleRelease', 'copyAppBuildFile']) {
+}
